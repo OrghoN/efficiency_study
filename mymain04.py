@@ -50,7 +50,6 @@ class K0sK0sFilter:
         self.min_pT = 0.05 # GeV
         self.max_pT = 2.50 # GeV
         self.max_abs_eta = 2.50
-        self.event_count = 0
         self.event_set = set([])
         self.proton_set = set([])
         self.K0s_set = set([])
