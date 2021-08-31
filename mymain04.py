@@ -19,7 +19,7 @@ PI_NEG_ID = -211
 PROTON_ID = 2212
 group_number = 1
 
-# set config opTions
+# set config options
 cfg = open( "Makefile.inc" )
 lib = "../lib"
 for line in cfg:
@@ -74,6 +74,7 @@ class K0sK0sFilter:
         global group_number
 
         for prt in event:
+            # set check ensures no double counting
             if ( prt.id() == K0s_ID ) and ( prt not in self.K0s_set ):
                 valid_K0s = []
                 for mother in prt.motherList():
@@ -84,11 +85,13 @@ class K0sK0sFilter:
                           and ( cur_K0s not in valid_K0s ):
                             valid_K0s.append( cur_K0s )
 
+                # make sure event has two K0s
                 if ( len( valid_K0s ) == 2 ):
                     pion_group = []
                     for K0s in valid_K0s:
                         for pion in K0s.daughterList():
                             cur_pion = pythia.event[pion]
+                            # check pion decay. if decay is valid, add pions to list of pion groups
                             if ( cur_pion.idAbs() == PI_POS_ID ) and ( self.checkThresholds( cur_pion ) ):
                                 pion_group.append( cur_pion )
 
@@ -99,12 +102,16 @@ class K0sK0sFilter:
                        #     print( "pion " + str( i ) + ':' )
                        #     print( "| pT: " + str( pion_group[i].pT() )\
                        #                 + " | eta: " + str( pion_group[i].eta() ) + " |" )
+                        
+                        # if event is valid, append particles to lists
                         self.K0s_pairs.append( valid_K0s )
                         self.K0s_set.add( valid_K0s[0] )
                         self.K0s_set.add( valid_K0s[1] )
                         self.recordPionData( pion_group )
                         group_number += 1
 
+                        # search valid K0sK0s -> pi+pi-pi+pi- event for diffractively and
+                        # elastically scattered protons
                         for proton in event:
                             if ( ( proton.id() == PROTON_ID ) and ( ( proton.status() == 14 ) or ( proton.status() == 15 ) ) ):
                                 self.proton_set.add( proton )
