@@ -117,6 +117,7 @@ class K0sK0sFilter:
                                 proton_p_vals.write( str( proton.px() ) + ',' )
                                 proton_p_vals.write( str( proton.py() ) + ',' )
                                 proton_p_vals.write( str( proton.pz() ) + '\n' )
+                                self.proton_set.add( proton )
                         # may need to indent return True for proper event filtering as a requirement is
                         # seeing these protons. Mainly worrying about K0sK0s events for now.
                         return True
