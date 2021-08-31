@@ -82,7 +82,7 @@ histbins = [ 0.00, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50,
              1.55, 1.60, 1.65, 1.70, 1.75, 1.80, 1.85, 1.90, 1.95, 2.00 ]
 
 total_eff_err = math.sqrt( total_eff_err )
-#average_eff /= 2648 this division is no longer relevant
+#average_eff /= NUMBER OF VALID EVENTS GENERATED (WITHOUT EFFICIENCY FACTOR)
 average_eff = 0
 print("Total Efficiency Error = " + str( total_eff_err ) )
 print("average efficiency = " + str( average_eff ) )
