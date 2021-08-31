@@ -288,14 +288,6 @@ class K0sK0sFilter:
             self.event_pions.remove( pion_group )
 
 
-    def recordProtonData( self ):
-        global PROTON_ID
-
-        for proton in self.proton_set:
-            proton_p_vals.write( str( proton.px() ) + ',' )
-            proton_p_vals.write( str( proton.py() ) + ',' )
-            proton_p_vals.write( str( proton.pz() ) + '\n' )
-
 
     # checkpiondecay checks a K0s for valid pi+pi- decay
     def checkPionDecay( self, K0s ):
@@ -329,7 +321,6 @@ ef = K0sK0sFilter()
 for iEvent in range( 0, nEvent ):
         if not pythia.next(): continue
         ef.filterEvent( pythia.event )
-ef.recordProtonData()
 
 # end of loop statistics
 pythia.stat()
