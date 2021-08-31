@@ -1,6 +1,6 @@
 ###############################################################################
 # Author: Thomas McDowell
-# Date: August 31, 2021
+# Date: 31/08/2021
 # DescripTion: A generator-level monte carlo simulation to study K0sK0s ->
 # pi+pi-pi+pi- events
 #
