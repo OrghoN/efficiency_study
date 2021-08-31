@@ -52,10 +52,10 @@ class K0sK0sFilter:
         self.max_abs_eta = 2.50
         self.event_count = 0
         self.event_set = set([])
+        self.proton_set = set([])
         self.K0s_set = set([])
         self.K0s_pairs = []
         self.event_pions = []
-        self.proton_set = set([])
     
     # filterEvent filters out events without K0sK0s -> pi+pi-pi+pi- decay
     def filterEvent( self, event ):
