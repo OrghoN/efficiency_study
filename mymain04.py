@@ -84,7 +84,6 @@ class K0sK0sFilter:
                           and ( cur_K0s not in valid_K0s ):
                             valid_K0s.append( cur_K0s )
 
-
                 if ( len( valid_K0s ) == 2 ):
                     pion_group = []
                     for K0s in valid_K0s:
