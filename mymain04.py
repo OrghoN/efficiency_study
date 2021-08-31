@@ -89,9 +89,9 @@ class K0sK0sFilter:
                 if ( len( valid_K0s ) == 2 ):
                     pion_group = []
                     for K0s in valid_K0s:
+                        # check pion decay. if decay is valid, add pions to list of pion groups
                         for pion in K0s.daughterList():
                             cur_pion = pythia.event[pion]
-                            # check pion decay. if decay is valid, add pions to list of pion groups
                             if ( cur_pion.idAbs() == PI_POS_ID ) and ( self.checkThresholds( cur_pion ) ):
                                 pion_group.append( cur_pion )
 
