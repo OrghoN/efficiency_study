@@ -114,7 +114,11 @@ class K0sK0sFilter:
                         # elastically scattered protons
                         for proton in event:
                             if ( ( proton.id() == PROTON_ID ) and ( ( proton.status() == 14 ) or ( proton.status() == 15 ) ) ):
-                                self.proton_set.add( proton )
+                                proton_p_vals.write( str( proton.px() ) + ',' )
+                                proton_p_vals.write( str( proton.py() ) + ',' )
+                                proton_p_vals.write( str( proton.pz() ) + '\n' )
+                        # may need to indent return True for proper event filtering as a requirement is
+                        # seeing these protons. Mainly worrying about K0sK0s events for now.
                         return True
         return False
 
