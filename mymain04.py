@@ -1,8 +1,8 @@
 ###############################################################################
 # Author: Thomas McDowell
-# Date: 31/08/2021
-# DescripTion: A generator-level monte carlo simulation to study K0sK0s ->
-# pi+pi-pi+pi- events
+# Date: August 9, 2021
+# DescripTion: A generator-level monte carlo simulation to study K0sK0s -> 4pi
+# events with Q = 0
 #
 ###############################################################################
 
@@ -19,7 +19,7 @@ PI_NEG_ID = -211
 PROTON_ID = 2212
 group_number = 1
 
-# set config options
+# set config opTions
 cfg = open( "Makefile.inc" )
 lib = "../lib"
 for line in cfg:
@@ -52,10 +52,10 @@ class K0sK0sFilter:
         self.max_abs_eta = 2.50
         self.event_count = 0
         self.event_set = set([])
-        self.proton_set = set([])
         self.K0s_set = set([])
         self.K0s_pairs = []
         self.event_pions = []
+        self.proton_set = set([])
     
     # filterEvent filters out events without K0sK0s -> pi+pi-pi+pi- decay
     def filterEvent( self, event ):
@@ -73,8 +73,8 @@ class K0sK0sFilter:
         global PROTON_ID
         global group_number
 
+        # check event for K0sK0s decay and valid pion daughters
         for prt in event:
-            # set check ensures no double counting
             if ( prt.id() == K0s_ID ) and ( prt not in self.K0s_set ):
                 valid_K0s = []
                 for mother in prt.motherList():
@@ -85,42 +85,40 @@ class K0sK0sFilter:
                           and ( cur_K0s not in valid_K0s ):
                             valid_K0s.append( cur_K0s )
 
-                # make sure event has two K0s
+                # if valid decay pattern is found, group the pions
                 if ( len( valid_K0s ) == 2 ):
                     pion_group = []
                     for K0s in valid_K0s:
-                        # check pion decay. if decay is valid, add pions to list of pion groups
                         for pion in K0s.daughterList():
                             cur_pion = pythia.event[pion]
                             if ( cur_pion.idAbs() == PI_POS_ID ) and ( self.checkThresholds( cur_pion ) ):
                                 pion_group.append( cur_pion )
-
+                    
+                    # look for valid protons within the event. If found, record and store
+                    # event data as all criteria for a valid event have been fulfilled
                     if ( len( pion_group ) == 4 ):
-                       # UNCOMMENT FOR DEBUGGING PURPOSES
-                       # print( "Pion group " + str( group_number ) + " :" )
-                       # for i in range( len( pion_group ) ):
-                       #     print( "pion " + str( i ) + ':' )
-                       #     print( "| pT: " + str( pion_group[i].pT() )\
-                       #                 + " | eta: " + str( pion_group[i].eta() ) + " |" )
-                        
-                        # if event is valid, append particles to lists
-                        self.K0s_pairs.append( valid_K0s )
-                        self.K0s_set.add( valid_K0s[0] )
-                        self.K0s_set.add( valid_K0s[1] )
-                        self.recordPionData( pion_group )
-                        group_number += 1
-
-                        # search valid K0sK0s -> pi+pi-pi+pi- event for diffractively and
-                        # elastically scattered protons
+                        protons = []
                         for proton in event:
                             if ( ( proton.id() == PROTON_ID ) and ( ( proton.status() == 14 ) or ( proton.status() == 15 ) ) ):
+                                protons.append( proton )
+                        if ( len( protons ) > 0 ):
+                            # UNCOMMENT FOR DEBUGGING PURPOSES
+                            # print( "Pion group " + str( group_number ) + " :" )
+                            # for i in range( len( pion_group ) ):
+                            #     print( "pion " + str( i ) + ':' )
+                            #     print( "| pT: " + str( pion_group[i].pT() )\
+                            #                 + " | eta: " + str( pion_group[i].eta() ) + " |" )
+                            # group_number += 1
+
+                            self.K0s_pairs.append( valid_K0s )
+                            self.K0s_set.add( valid_K0s[0] )
+                            self.K0s_set.add( valid_K0s[1] )
+                            self.recordPionData( pion_group )
+                            for proton in protons:
                                 proton_p_vals.write( str( proton.px() ) + ',' )
                                 proton_p_vals.write( str( proton.py() ) + ',' )
                                 proton_p_vals.write( str( proton.pz() ) + '\n' )
-                                self.proton_set.add( proton )
-                        # may need to indent return True for proper event filtering as a requirement is
-                        # seeing these protons. Mainly worrying about K0sK0s events for now.
-                        return True
+                            return True
         return False
 
     # recordData records particle data after event generation and filtering
@@ -287,8 +285,6 @@ class K0sK0sFilter:
                     print( "| pT: " + str( pion_group[j].pT() )\
                             + " | eta: " + str( pion_group[j].eta() ) + " |" )
             self.event_pions.remove( pion_group )
-
-
 
     # checkpiondecay checks a K0s for valid pi+pi- decay
     def checkPionDecay( self, K0s ):
