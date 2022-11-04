@@ -1,10 +1,10 @@
-#Overview
+# Overview
 
 A generator level simulation to create and plot data related to K0sK0s -> pi+pi-pi+pi- events resulting from double pomeron exchanges.
 
-#Installation
+# Installation
 
-##Prerequisites
+## Prerequisites
 
 - Linux Operating System
 - git
@@ -18,7 +18,7 @@ If you intend to use either windows or mac as the host system, a virtual machine
 A guide on installing ubuntu if you want to use linux but don't have it can be found [here.](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview)
 
 ### git
-Git is required for this code ane.
+Git is required for this code.
 It usually comes preinstalled with most linux systems.
 A quick way to check if you have it is to
 ```bash
@@ -34,7 +34,7 @@ If git is not installed, you should be able to install it with the package manag
 Singularity is required for this code because it is designed to run in a singularity container.
 A detailed guide to installing singularity can be found [here.](https://docs.sylabs.io/guides/3.0/user-guide/installation.html)
 
-####Quick Install for Ubuntu >= 20.04
+#### Quick Install for Ubuntu >= 20.04
 
 These commands will install singularity on Ubuntu systems >= 20.04.
 However it is important to note that this is well behind the latest version of singularity and as such some of the newer features will not be available if you choose to install it this way.
@@ -91,13 +91,13 @@ The container comes with the following software packages:
 
 - python3
 - wget
--pip
+- pip
 - rsync
 - numpy
--matplotlib
--pythia
+- matplotlib
+- pythia
 
-## Usage
+# Usage
 
 In order to use the software, the first thing to do is to invoke a shell within the singularity container. This can be achieved with the following command
 
