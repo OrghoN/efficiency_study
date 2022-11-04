@@ -19,12 +19,8 @@ PI_NEG_ID = -211
 PROTON_ID = 2212
 group_number = 1
 
-# set config opTions
-cfg = open( "Makefile.inc" )
-lib = "../lib"
-for line in cfg:
-        if line.startswith( "PREFIX_LIB=" ): lib = line[11:-1]; break
-sys.path.insert(0, lib)
+#Link pythia library
+sys.path.insert(0, "/usr/local/lib")
 
 # create files to store particle data
 # csv file for event efficiency and error on event efficiency
