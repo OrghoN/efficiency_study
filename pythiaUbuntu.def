@@ -3,27 +3,17 @@ From: ubuntu:22.04
 
 %post
     apt update
-    apt -y install wget python3 pip
+    apt -y install wget python3 pip rsync
 pip install numpy matplotlib
 wget https://pythia.org/download/pythia83/pythia8307.tgz
 tar xvfz pythia8307.tgz
 rm pythia8307.tgz
 cd pythia8307
     ./configure --with-python-config=python3-config --prefix=/usr/local
-make
+make -j `nproc`
 make install
-
-
-
-
-
-%test
-    grep -q NAME=\"Ubuntu\" /etc/os-release
-    if [ $? -eq 0 ]; then
-        echo "Container base is Ubuntu as expected."
-    else
-        echo "Container base is not Ubuntu."
-    fi
+cd ../
+rm -rf  pythia8307
 
 %labels
     Author Orgho
