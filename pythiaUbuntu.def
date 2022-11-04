@@ -3,7 +3,19 @@ From: ubuntu:22.04
 
 %post
     apt update
-    apt -y install wget python3
+    apt -y install wget python3 pip
+pip install numpy matplotlib
+wget https://pythia.org/download/pythia83/pythia8307.tgz
+tar xvfz pythia8307.tgz
+rm pythia8307.tgz
+cd pythia8307
+    ./configure --with-python-config=python3-config --prefix=/usr/local
+make
+make install
+
+
+
+
 
 %test
     grep -q NAME=\"Ubuntu\" /etc/os-release
