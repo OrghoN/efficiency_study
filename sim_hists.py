@@ -38,17 +38,17 @@ average_eff   = 0
 with open( 'event_eff_err.csv' ) as eff_file:
     readCSV = csv.reader( eff_file, delimiter = ',' )
     for row in eff_file:
-	row_list = row.split(',')
+        row_list = row.split(',')
         average_eff += float( row_list[0] )
-	total_eff_err += ( float( row_list[1] )**2 )
+        total_eff_err += ( float( row_list[1] )**2 )
 
 with open( 'min_max_cut1.csv' ) as cut1_file:
     readCSV = csv.reader( cut1_file, delimiter = ',' )
     for row in cut1_file:
-	row_list = row.split( ',' )
-	pi_min_pT_vals_cut1.append( float( row_list[0] ) )
-	pi_max_pT_vals_cut1.append( float( row_list[1] ) )
-	pi_max_abs_eta_cut1.append( float( row_list[2] ) )
+        row_list = row.split( ',' )
+        pi_min_pT_vals_cut1.append( float( row_list[0] ) )
+        pi_max_pT_vals_cut1.append( float( row_list[1] ) )
+        pi_max_abs_eta_cut1.append( float( row_list[2] ) )
 
 with open( 'min_max_cut2.csv' ) as cut2_file:
     readCSV = csv.reader( cut2_file, delimiter = ',' )
@@ -69,7 +69,7 @@ with open( 'min_max_cut3.csv' ) as cut3_file:
 with open( 'pion_pT_eta.csv' ) as pT_eta_file:
     readCSV = csv.reader( pT_eta_file, delimiter = ',' )
     for row in pT_eta_file:
-	row_list = row.split( ',' )
+        row_list = row.split( ',' )
         pi_pTs.append( float( row_list[0] ) )
         pi_etas.append( abs( float( row_list[1] ) ) )
 
