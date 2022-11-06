@@ -11,6 +11,7 @@ import sys
 import numpy as np
 import math
 from matplotlib import pyplot as plt
+from multiprocessing import Pool
 
 # PIDs used within the simulaiton
 K0s_ID = 310
@@ -307,18 +308,22 @@ class K0sK0sFilter:
         else:
             return False
 
+def generate(args):
+    if not pythia.next(): return(0)
+    ef.filterEvent( pythia.event )
+    return(1)
 
 # MAIN LOOP, EVENT GENERATION
 nEvent = pythia.mode( "Main:numberOfEvents" )
 ef = K0sK0sFilter()
-for iEvent in range( 0, nEvent ):
-        if not pythia.next(): continue
-        ef.filterEvent( pythia.event )
+
+with Pool() as pool:
+    pool.map(generate, range( 0, nEvent ))
 
 # end of loop statistics
 pythia.stat()
-sigma_info = pythia.info.sigmaGen();
-weightSum = pythia.info.weightSum();
+#sigma_info = pythia.info.sigmaGen();
+#weightSum = pythia.info.weightSum();
 
 print( "Number of valid K0sK0s -> pi+pi-pi+pi- events: " + str( len( ef.event_set ) ) )
 print( "Number of events ( with efficiency factor ): " + str( ef.event_count ) )
