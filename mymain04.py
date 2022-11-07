@@ -11,7 +11,6 @@ import sys
 import numpy as np
 import math
 from matplotlib import pyplot as plt
-from multiprocessing import Pool
 
 # PIDs used within the simulaiton
 K0s_ID = 310
@@ -25,13 +24,13 @@ sys.path.insert(0, "/usr/local/lib")
 
 # create files to store particle data
 # csv file for event efficiency and error on event efficiency
-event_eff_err = open( "event_eff_err.csv", "w" )
+event_eff_err = open( "data/event_eff_err-" + sys.argv[1] + ".csv", "w" )
 # csv file for min event pT, max event pT, max absolute value of eta in event
-min_max_cut1 = open( "min_max_cut1.csv", "w" )
-min_max_cut2 = open( "min_max_cut2.csv", "w" )
-min_max_cut3 = open( "min_max_cut3.csv", "w" )
-pion_pT_eta = open( "pion_pT_eta.csv", "w" )
-proton_p_vals = open( "proton_p_vals.csv", "w" )
+min_max_cut1 = open( "data/min_max_cut1-" + sys.argv[1] + ".csv", "w" )
+min_max_cut2 = open( "data/min_max_cut2-" + sys.argv[1] + ".csv", "w" )
+min_max_cut3 = open( "data/min_max_cut3-" + sys.argv[1] + ".csv", "w" )
+pion_pT_eta = open( "data/pion_pT_eta-" + sys.argv[1] + ".csv", "w" )
+proton_p_vals = open( "data/proton_p_vals-" + sys.argv[1] + ".csv", "w" )
 
 # SIMULATION INITIALIZATION
 import pythia8
@@ -308,22 +307,18 @@ class K0sK0sFilter:
         else:
             return False
 
-def generate(args):
-    if not pythia.next(): return(0)
-    ef.filterEvent( pythia.event )
-    return(1)
 
 # MAIN LOOP, EVENT GENERATION
 nEvent = pythia.mode( "Main:numberOfEvents" )
 ef = K0sK0sFilter()
-
-with Pool() as pool:
-    pool.map(generate, range( 0, nEvent ))
+for iEvent in range( 0, nEvent ):
+        if not pythia.next(): continue
+        ef.filterEvent( pythia.event )
 
 # end of loop statistics
 pythia.stat()
-#sigma_info = pythia.info.sigmaGen();
-#weightSum = pythia.info.weightSum();
+sigma_info = pythia.info.sigmaGen();
+weightSum = pythia.info.weightSum();
 
 print( "Number of valid K0sK0s -> pi+pi-pi+pi- events: " + str( len( ef.event_set ) ) )
 print( "Number of events ( with efficiency factor ): " + str( ef.event_count ) )
