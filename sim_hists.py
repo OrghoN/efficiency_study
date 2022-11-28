@@ -97,7 +97,8 @@ plt.title("Max pT of pi+ and pi- in K0K0s Daughter Groups (0.1 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxPt01Pi+pi-.png", transparent=True)
 
 plt.figure(1)
 plt.figure(1).patch.set_facecolor('white')
@@ -108,7 +109,8 @@ plt.title("Min pT of pi+ and pi- in K0sK0s Daughter Groups (0.1 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/minPt01Pi+pi-.png", transparent=True)
 
 plt.figure(2)
 plt.figure(2).patch.set_facecolor('white')
@@ -118,7 +120,8 @@ plt.title("Max Abs. Value of eta for pi+ pi- in K0sK0s Daughter Groups (0.1 GeV 
 plt.xlabel("eta")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxeta01Pi+pi-.png", transparent=True)
 
 plt.figure(3)
 plt.figure(3).patch.set_facecolor('white')
@@ -129,7 +132,9 @@ plt.title("Max pT of pi+ and pi- in K0K0s Daughter Groups (0.5 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxPt05Pi+pi-.png", transparent=True)
+
 
 plt.figure(4)
 plt.figure(4).patch.set_facecolor('white')
@@ -140,7 +145,8 @@ plt.title("Min pT of pi+ and pi- in K0sK0s Daughter Groups (0.5 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/minPt05Pi+pi-.png", transparent=True)
 
 plt.figure(5)
 plt.figure(5).patch.set_facecolor('white')
@@ -150,7 +156,8 @@ plt.title("Max Abs. Value of eta for pi+ pi- in K0sK0s Daughter Groups (0.5 GeV 
 plt.xlabel("eta")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxeta05Pi+pi-.png", transparent=True)
 
 plt.figure(6)
 plt.figure(6).patch.set_facecolor('white')
@@ -161,7 +168,9 @@ plt.title("Max pT of pi+ and pi- in K0K0s Daughter Groups (1.0 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxPt1Pi+pi-.png", transparent=True)
+
 
 plt.figure(7)
 plt.figure(7).patch.set_facecolor('white')
@@ -172,7 +181,8 @@ plt.title("Min pT of pi+ and pi- in K0sK0s Daughter Groups (1.0 GeV cut)")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/minPt1Pi+pi-.png", transparent=True)
 
 plt.figure(8)
 plt.figure(8).patch.set_facecolor('white')
@@ -182,7 +192,8 @@ plt.title("Max Abs. Value of eta for pi+ pi- in K0sK0s Daughter Groups (1.0 GeV 
 plt.xlabel("eta")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/maxeta1Pi+pi-.png", transparent=True)
 
 plt.figure(9)
 plt.figure(9).patch.set_facecolor('white')
@@ -193,7 +204,8 @@ plt.title("pT of pi+ and pi- from K0sK0s Decay")
 plt.xlabel("pT (GeV)")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/ptk0.png", transparent=True)
 
 plt.figure(10)
 plt.figure(10).patch.set_facecolor('white')
@@ -204,4 +216,5 @@ plt.title("eta of pi+ and pi- from K0sK0s Decay")
 plt.xlabel("eta")
 plt.ylabel("Number of pi+ and pi-")
 
-plt.show()
+#plt.show()
+plt.savefig("plots/etak0.png", transparent=True)
