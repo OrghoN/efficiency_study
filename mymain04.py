@@ -317,8 +317,8 @@ for iEvent in range( 0, nEvent ):
 
 # end of loop statistics
 pythia.stat()
-sigma_info = pythia.info.sigmaGen();
-weightSum = pythia.info.weightSum();
+##sigma_info = pythia.info.sigmaGen();
+##weightSum = pythia.info.weightSum();
 
 print( "Number of valid K0sK0s -> pi+pi-pi+pi- events: " + str( len( ef.event_set ) ) )
 print( "Number of events ( with efficiency factor ): " + str( ef.event_count ) )
