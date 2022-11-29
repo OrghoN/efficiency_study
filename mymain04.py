@@ -35,7 +35,7 @@ proton_p_vals = open( "data/proton_p_vals-" + sys.argv[1] + ".csv", "w" )
 # SIMULATION INITIALIZATION
 import pythia8
 pythia = pythia8.Pythia()
-pythia.readFile( "mymain04.cmnd" )
+pythia.readFile( "cmnd/beamParameters" + sys.argv[1] + ".cmnd" )
 pythia.init()
 
 # K0sK0sFilter is a class to filter out unwanted events and store events
